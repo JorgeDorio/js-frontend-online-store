@@ -4,6 +4,7 @@
   padding: 0;
 }
 
+/* Descomentar esta linha */
 /* #root {
   background-color: #f9f9f9;
   display: flex;
@@ -24,6 +25,19 @@
   font-weight: 400;
   letter-spacing: 0.5rem;
   margin-top: 15px;
+}
+
+.categorie{
+  list-style-type: none;
+}
+
+.categorie button{
+  border: none;
+  background-color: white;
+  font-size: 8pt;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
 }
 
 .searchNContent {
