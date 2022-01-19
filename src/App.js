@@ -14,7 +14,6 @@ export default class App extends Component {
           <Searchbar />
           <Content />
         </div>
-
       </BrowserRouter>
     );
   }
