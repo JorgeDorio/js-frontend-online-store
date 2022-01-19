@@ -1,18 +1,21 @@
-import React from 'react';
-// import logo from './logo.svg';
+import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import Sidebar from './components/Sidebar';
+import Searchbar from './components/Searchbar';
+import Content from './components/Content';
 import './App.css';
 import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 
-// getCategories();
-getProductsFromCategoryAndQuery(getCategories());
-class App extends React.Component {
-  // First commit
-
+export default class App extends Component {
   render() {
     return (
-      <div className="App" />
+      <BrowserRouter>
+        <Sidebar />
+        <div className="searchNContent">
+          <Searchbar />
+          <Content />
+        </div>
+      </BrowserRouter>
     );
   }
 }
-
-export default App;
