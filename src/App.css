@@ -4,7 +4,8 @@
   padding: 0;
 }
 
-/* Descomentar esta linha */
+/* Descomentar #root */
+
 /* #root {
   background-color: #f9f9f9;
   display: flex;
@@ -27,13 +28,13 @@
   margin-top: 15px;
 }
 
-.categorie{
+.categorie {
   list-style-type: none;
 }
 
-.categorie button{
-  border: none;
+.categorie button {
   background-color: white;
+  border: none;
   font-size: 8pt;
   font-style: normal;
   font-weight: 400;
