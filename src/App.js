@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import Sidebar from './components/Sidebar';
+import Searchbar from './components/Searchbar';
+import Content from './components/Content';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>Edit src/App.js and save to reload.</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Sidebar />
+        <div className="searchNContent">
+          <Searchbar />
+          <Content />
+        </div>
 
-export default App;
+      </BrowserRouter>
+    );
+  }
+}
