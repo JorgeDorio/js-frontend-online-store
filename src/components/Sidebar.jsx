@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class Sidebar extends Component {
   render() {
@@ -6,6 +6,6 @@ export default class Sidebar extends Component {
       <div className="sidebar">
         <h1>CATEGORIAS:</h1>
       </div>
-    )
+    );
   }
 }
