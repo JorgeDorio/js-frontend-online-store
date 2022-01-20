@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 export default class Content extends Component {
   render() {
-    return <div className="content">Conteudo</div>;
+    return (
+      <h1 data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </h1>
+    );
   }
 }
