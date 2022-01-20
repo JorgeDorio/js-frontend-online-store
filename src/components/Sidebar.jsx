@@ -28,7 +28,9 @@ class Sidebar extends Component {
         <ul>
           {allCategories.map((cat) => (
             <li className="categorie" key={ cat.id } data-testid="category">
-              <button type="button">{cat.name}</button>
+              <button type="button" onClick={ () => (console.log(cat.name)) }>
+                {cat.name}
+              </button>
             </li>
           ))}
         </ul>
