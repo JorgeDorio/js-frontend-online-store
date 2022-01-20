@@ -4,12 +4,10 @@
   padding: 0;
 }
 
-/* Descomentar #root */
-
-/* #root {
+.root {
   background-color: #f9f9f9;
   display: flex;
-} */
+}
 
 .sidebar {
   background-color: white;
