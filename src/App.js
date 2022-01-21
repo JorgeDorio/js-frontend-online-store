@@ -10,11 +10,13 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route path="/" component={ MainPage } />
-        <Sidebar />
-        <div className="searchNContent">
-          <Searchbar />
-          <Content />
+        <div className="root">
+          <Route path="/" component={ MainPage } />
+          <Sidebar />
+          <div className="searchNContent">
+            <Searchbar />
+            <Content />
+          </div>
         </div>
       </BrowserRouter>
     );
