@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import EmptyCart from './EmptyCart';
+import Searchbar from '../components/Searchbar';
 
 class MainPage extends React.Component {
   render() {
     return (
       <div>
         <label htmlFor="search">
-          <input type="text" id="search" className="root" />
+          <Searchbar />
+          {/* <input type="text" id="search" className="root" /> */}
         </label>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
