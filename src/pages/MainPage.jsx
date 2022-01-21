@@ -7,7 +7,7 @@ class MainPage extends React.Component {
     return (
       <div>
         <label htmlFor="search">
-          <input type="text" id="search" />
+          <input type="text" id="search" className="root" />
         </label>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
