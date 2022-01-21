@@ -17,7 +17,7 @@ class Sidebar extends Component {
   givingCategories = async () => {
     const myData = await getCategories();
     this.setState({ allCategories: myData });
-    console.log(myData);
+    // console.log(myData);
   }
 
   render() {
