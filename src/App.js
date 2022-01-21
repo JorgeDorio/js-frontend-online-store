@@ -9,10 +9,12 @@ export default class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Sidebar />
-        <div className="searchNContent">
-          <Searchbar />
-          <Content />
+        <div className="root">
+          <Sidebar />
+          <div className="searchNContent">
+            <Searchbar />
+            <Content />
+          </div>
         </div>
       </BrowserRouter>
     );
