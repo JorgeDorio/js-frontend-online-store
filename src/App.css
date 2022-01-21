@@ -4,9 +4,10 @@
   padding: 0;
 }
 .root {
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   display: flex;
 }
+
 .sidebar {
   background-color: white;
   border-radius: 10px;
@@ -15,6 +16,7 @@
   text-align: center;
   width: 25%;
 }
+
 .sidebar h1 {
   font-size: 8pt;
   font-style: normal;
@@ -22,9 +24,11 @@
   letter-spacing: 0.5rem;
   margin-top: 15px;
 }
+
 .categorie {
   list-style-type: none;
 }
+
 .categorie button {
   background-color: white;
   border: none;
@@ -33,16 +37,19 @@
   font-weight: 400;
   letter-spacing: 0.1rem;
 }
+
 .searchNContent {
   margin: 1rem 1rem 1rem 0;
   width: 100%;
 }
+
 .searchbar {
   border: 1px dimgray solid;
   border-radius: 10rem;
   height: 30px;
   width: 100%;
 }
+
 .content {
   background-color: white;
   border-radius: 10px;
