@@ -8,7 +8,6 @@ class Content extends Component {
 
     this.state = {
       allCategories: [],
-      // idsAndQuerrys: [],
     };
   }
 
@@ -19,18 +18,8 @@ class Content extends Component {
   givingCategories = async () => {
     const myData = await getCategories();
     this.setState({ allCategories: myData });
-    // , () => { this.givingIdsAndQuerry(); }
-    // console.log(myData);
   }
 
-  // givingIdsAndQuerry = async () => {
-  //   const { allCategories } = this.state;
-  //   console.log(allCategories);
-  //   allCategories.forEach(async (product) => {
-  //     const object = await getProductsFromCategoryAndQuery(product.id, product.name);
-  //     console.log(object);
-  //   });
-  // }
 
   render() {
     const { allCategories } = this.state;
@@ -48,6 +37,10 @@ class Content extends Component {
           ))}
         </div>
       </div>
+    return (
+      <h1 data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </h1>
     );
   }
 }
