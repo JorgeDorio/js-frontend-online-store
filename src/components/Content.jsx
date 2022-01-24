@@ -9,6 +9,7 @@ class Content extends Component {
 
   render() {
     const { renderingCardArray } = this.props;
+    console.log(renderingCardArray);
 
     return (
       <div>
@@ -23,7 +24,9 @@ class Content extends Component {
 
 Content.propTypes = {
   creatingCard: PropTypes.func.isRequired,
-  renderingCardArray: PropTypes.array.isRequired,
+  renderingCardArray: PropTypes.arrayOf({
+    props: PropTypes.object,
+  }).isRequired,
 };
 
 export default Content;
