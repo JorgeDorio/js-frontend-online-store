@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Searchbar extends Component {
   constructor() {
@@ -13,19 +12,17 @@ class Searchbar extends Component {
   handleChange = (event) => {
     const { value } = event.target;
     this.setState({ textoDigitado: value });
+    // this.props.searchbarCallback(value);
   };
 
   searchQuery = async () => {
+    const { searchbarCallback } = this.props;
     const inputValue = document.querySelector('#search').value;
-    const { categorySelected } = this.state;
-    const data = await getProductsFromCategoryAndQuery(categorySelected, inputValue);
-    console.log(inputValue);
-    console.log(categorySelected);
-    console.log(data);
+    searchbarCallback(inputValue);
   }
 
   render() {
-    const { textoDigitado } = this.state;
+    const { textoDigitado } = this.props;
 
     return (
       <div>
@@ -46,7 +43,10 @@ class Searchbar extends Component {
           <button
             type="button"
             data-testid="query-button"
-            onClick={ this.searchQuery }
+            onClick={ () => {
+              this.searchQuery();
+
+            } }
           >
             Pesquisar
           </button>

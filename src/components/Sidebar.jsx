@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class Sidebar extends Component {
@@ -6,7 +7,7 @@ class Sidebar extends Component {
     super();
     this.state = {
       allCategories: [],
-      categorySelected: '',
+      // categorySelected: '',
     };
   }
 
@@ -20,7 +21,8 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { allCategories, categorySelected } = this.state;
+    const { allCategories } = this.state;
+    const { sidebarCallback } = this.props;
     return (
       <div className="sidebar">
         <h1>CATEGORIAS</h1>
@@ -30,7 +32,7 @@ class Sidebar extends Component {
               <button
                 type="button"
                 onClick={ () => {
-                  this.setState({ categorySelected: cat.id }); console.log(cat.id);
+                  sidebarCallback(cat.id);
                 } }
               >
                 {cat.name}
@@ -42,5 +44,9 @@ class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  sidebarCallback: PropTypes.func.isRequired,
+};
 
 export default Sidebar;
