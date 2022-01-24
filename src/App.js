@@ -1,22 +1,73 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import { BrowserRouter } from 'react-router-dom';
 import Searchbar from './components/Searchbar';
+import Sidebar from './components/Sidebar';
 import Content from './components/Content';
-import MainPage from './pages/MainPage';
+import Cart from './pages/Cart';
+import Card from './components/Card';
+import { getProductsFromCategoryAndQuery } from './services/api';
 import './App.css';
 
 export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      textoDigitado: [],
+      categorySelected: '',
+      renderingCardArray: [],
+    };
+
+    this.sidebarCallback = this.sidebarCallback.bind(this);
+    this.searchbarCallback = this.searchbarCallback.bind(this);
+    this.creatingCard = this.creatingCard.bind(this);
+  }
+
+  creatingCard = async () => {
+    const { categorySelected, textoDigitado } = this.state;
+    const data = await
+    getProductsFromCategoryAndQuery(categorySelected, textoDigitado);
+    const listArray = data.results.map((item) => (
+      <Card
+        key={ item.id }
+        titulo={ item.title }
+        foto={ item.thumbnail }
+        price={ item.price }
+        idCategory={ item.category_id }
+      />
+    ));
+    this.setState({ renderingCardArray: listArray });
+  }
+
+  sidebarCallback(categorySelected) {
+    this.setState({ categorySelected }, this.creatingCard);
+  }
+
+  searchbarCallback(textoDigitado) {
+    this.setState({ textoDigitado }, this.creatingCard);
+  }
+
   render() {
+    const { textoDigitado, categorySelected, renderingCardArray } = this.state;
     return (
       <BrowserRouter>
         <div className="root">
-          <Route path="/" component={ MainPage } />
-          <Sidebar />
+          <Sidebar
+            sidebarCallback={ this.sidebarCallback }
+            creatingCard={ this.creatingCard }
+          />
           <div className="searchNContent">
-            <Searchbar />
-            <Content />
+            <Searchbar
+              searchbarCallback={ this.searchbarCallback }
+              creatingCard={ this.creatingCard }
+            />
+            <Content
+              textoDigitado={ textoDigitado }
+              categorySelected={ categorySelected }
+              creatingCard={ this.creatingCard }
+              renderingCardArray={ renderingCardArray }
+            />
           </div>
+          <Cart />
         </div>
       </BrowserRouter>
     );

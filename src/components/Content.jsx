@@ -1,48 +1,32 @@
 import React, { Component } from 'react';
-import { getCategories } from '../services/api';
-import Card from './Card';
+import PropTypes from 'prop-types';
 
 class Content extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      allCategories: [],
-    };
-  }
-
   componentDidMount() {
-    this.givingCategories();
+    const { creatingCard } = this.props;
+    creatingCard();
   }
-
-  givingCategories = async () => {
-    const myData = await getCategories();
-    this.setState({ allCategories: myData });
-  }
-
 
   render() {
-    const { allCategories } = this.state;
+    const { renderingCardArray } = this.props;
+    console.log(renderingCardArray);
 
     return (
       <div>
-        <h1 className="titleClass">Conteudo</h1>
+        <h1 className="titleClass">Content</h1>
         <div className="content">
-          {allCategories.map((product) => (
-            <Card
-              key={ product.id }
-              id={ product.id }
-              name={ product.name }
-            />
-          ))}
+          {renderingCardArray}
         </div>
       </div>
-    return (
-      <h1 data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </h1>
     );
   }
 }
+
+Content.propTypes = {
+  creatingCard: PropTypes.func.isRequired,
+  renderingCardArray: PropTypes.arrayOf({
+    props: PropTypes.object,
+  }).isRequired,
+};
 
 export default Content;
