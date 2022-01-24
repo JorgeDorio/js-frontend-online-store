@@ -33,6 +33,7 @@ class Sidebar extends Component {
                 type="button"
                 onClick={ () => {
                   sidebarCallback(cat.id);
+                  // creatingCard();
                 } }
               >
                 {cat.name}

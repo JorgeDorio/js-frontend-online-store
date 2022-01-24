@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Searchbar extends Component {
   constructor() {
     super();
     this.state = {
-      textoDigitado: '',
+      // textoDigitado: '',
     };
   }
 
-  handleChange = (event) => {
-    const { value } = event.target;
-    this.setState({ textoDigitado: value });
-    // this.props.searchbarCallback(value);
-  };
+  // handleChange = (event) => {
+  //   const { value } = event.target;
+  //   this.setState({ textoDigitado: value });
+  //   // this.props.searchbarCallback(value);
+  // };
 
   searchQuery = async () => {
     const { searchbarCallback } = this.props;
@@ -32,7 +33,7 @@ class Searchbar extends Component {
             <input
               type="text"
               id="search"
-              onChange={ this.handleChange }
+              // onChange={ this.handleChange }
               value={ textoDigitado }
               data-testid="query-input"
               className="searchbar"
@@ -45,7 +46,6 @@ class Searchbar extends Component {
             data-testid="query-button"
             onClick={ () => {
               this.searchQuery();
-
             } }
           >
             Pesquisar
@@ -62,5 +62,10 @@ class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  searchbarCallback: PropTypes.func.isRequired,
+  textoDigitado: PropTypes.string.isRequired,
+};
 
 export default Searchbar;

@@ -1,42 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Card from './Card';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Content extends Component {
-  constructor() {
-    super();
-    this.state = {
-      renderingCardArray: [],
-    };
-  }
-
-  // componentDidUpdate() {
-  //   this.creatingCard();
-  // }
-
   componentDidMount() {
-    this.creatingCard();
-  }
-
-  creatingCard = async () => {
-    const { categorySelected, textoDigitado } = this.props;
-    const data = await
-    getProductsFromCategoryAndQuery(categorySelected, textoDigitado);
-    const listArray = data.results.map((item) => (
-      <Card
-        key={ item.id }
-        titulo={ item.title }
-        foto={ item.thumbnail }
-        price={ item.price }
-        idCategory={ item.category_id }
-      />
-    ));
-    this.setState({ renderingCardArray: listArray });
+    const { creatingCard } = this.props;
+    creatingCard();
   }
 
   render() {
-    const { renderingCardArray } = this.state;
+    const { renderingCardArray } = this.props;
 
     return (
       <div>
@@ -50,8 +22,8 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-  categorySelected: PropTypes.string.isRequired,
-  textoDigitado: PropTypes.string.isRequired,
+  creatingCard: PropTypes.func.isRequired,
+  renderingCardArray: PropTypes.array.isRequired,
 };
 
 export default Content;

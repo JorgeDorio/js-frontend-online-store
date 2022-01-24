@@ -4,6 +4,8 @@ import Searchbar from './components/Searchbar';
 import Sidebar from './components/Sidebar';
 import Content from './components/Content';
 import Cart from './pages/Cart';
+import Card from './components/Card';
+import { getProductsFromCategoryAndQuery } from './services/api';
 import './App.css';
 
 export default class App extends Component {
@@ -12,6 +14,7 @@ export default class App extends Component {
     this.state = {
       textoDigitado: [],
       categorySelected: '',
+      renderingCardArray: [],
     };
 
     this.sidebarCallback = this.sidebarCallback.bind(this);
@@ -19,20 +22,39 @@ export default class App extends Component {
     this.creatingCard = this.creatingCard.bind(this);
   }
 
+  creatingCard = async () => {
+    const { categorySelected, textoDigitado } = this.state;
+    const data = await
+    getProductsFromCategoryAndQuery(categorySelected, textoDigitado);
+    const listArray = data.results.map((item) => (
+      <Card
+        key={ item.id }
+        titulo={ item.title }
+        foto={ item.thumbnail }
+        price={ item.price }
+        idCategory={ item.category_id }
+      />
+    ));
+    this.setState({ renderingCardArray: listArray });
+  }
+
   sidebarCallback(categorySelected) {
-    this.setState({ categorySelected });
+    this.setState({ categorySelected }, this.creatingCard);
   }
 
   searchbarCallback(textoDigitado) {
-    this.setState({ textoDigitado });
+    this.setState({ textoDigitado }, this.creatingCard);
   }
 
   render() {
-    const { textoDigitado, categorySelected } = this.state;
+    const { textoDigitado, categorySelected, renderingCardArray } = this.state;
     return (
       <BrowserRouter>
         <div className="root">
-          <Sidebar sidebarCallback={ this.sidebarCallback } />
+          <Sidebar
+            sidebarCallback={ this.sidebarCallback }
+            creatingCard={ this.creatingCard }
+          />
           <div className="searchNContent">
             <Searchbar
               searchbarCallback={ this.searchbarCallback }
@@ -42,6 +64,7 @@ export default class App extends Component {
               textoDigitado={ textoDigitado }
               categorySelected={ categorySelected }
               creatingCard={ this.creatingCard }
+              renderingCardArray={ renderingCardArray }
             />
           </div>
           <Cart />
