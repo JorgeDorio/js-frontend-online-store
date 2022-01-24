@@ -1,46 +1,50 @@
 import React, { Component } from 'react';
-import { getCategories } from '../services/api';
 import Card from './Card';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Content extends Component {
+  // esse pedaço é do Searchbar e do Sidebar!
   constructor() {
     super();
-
     this.state = {
-      allCategories: [],
+      textoDigitado: 'cadeira',
+      // cadeira
+      categorySelected: 'MLB5672',
+      // id: MLB5672 / name: Acessórios para Veículos
+      renderingCardArray: [],
     };
   }
 
   componentDidMount() {
-    this.givingCategories();
+    this.creatingCard();
   }
 
-  givingCategories = async () => {
-    const myData = await getCategories();
-    this.setState({ allCategories: myData });
+  creatingCard = async () => {
+    const { textoDigitado, categorySelected } = this.state;
+    const data = await getProductsFromCategoryAndQuery(categorySelected, textoDigitado);
+    console.log(categorySelected);
+    const listArray = data.results.map((item) => (
+      <Card
+        key={ item.id }
+        titulo={ item.title }
+        foto={ item.thumbnail }
+        price={ item.price }
+        idCategory={ item.category_id }
+      />
+    ));
+    this.setState({ renderingCardArray: listArray });
   }
-
 
   render() {
-    const { allCategories } = this.state;
+    const { renderingCardArray } = this.state;
 
     return (
       <div>
-        <h1 className="titleClass">Conteudo</h1>
+        <h1 className="titleClass">Content</h1>
         <div className="content">
-          {allCategories.map((product) => (
-            <Card
-              key={ product.id }
-              id={ product.id }
-              name={ product.name }
-            />
-          ))}
+          {renderingCardArray}
         </div>
       </div>
-    return (
-      <h1 data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </h1>
     );
   }
 }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import { BrowserRouter } from 'react-router-dom';
 import Searchbar from './components/Searchbar';
-// import Content from './components/Content';
-import MainPage from './pages/MainPage';
+import Sidebar from './components/Sidebar';
+import Content from './components/Content';
+import Cart from './pages/Cart';
 import './App.css';
 
 export default class App extends Component {
@@ -11,12 +11,12 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <div className="root">
-          <Route path="/" component={ MainPage } />
-          {/* <Sidebar /> */}
+          <Sidebar />
           <div className="searchNContent">
-            {/* <Searchbar /> */}
-            {/* <Content /> */}
+            <Searchbar />
+            <Content />
           </div>
+          <Cart />
         </div>
       </BrowserRouter>
     );

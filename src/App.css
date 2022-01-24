@@ -19,11 +19,12 @@
 }
 
 .sidebar h1 {
-  font-size: 8pt;
+  font-size: 12pt;
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0.5rem;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .categorie {
