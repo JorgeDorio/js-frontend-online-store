@@ -15,11 +15,13 @@ export default class App extends Component {
       textoDigitado: [],
       categorySelected: '',
       renderingCardArray: [],
+      renderingItemCart: [],
     };
 
     this.sidebarCallback = this.sidebarCallback.bind(this);
     this.searchbarCallback = this.searchbarCallback.bind(this);
     this.creatingCard = this.creatingCard.bind(this);
+    this.cartCallback = this.cartCallback.bind(this);
   }
 
   creatingCard = async () => {
@@ -33,6 +35,7 @@ export default class App extends Component {
         foto={ item.thumbnail }
         price={ item.price }
         idCategory={ item.category_id }
+        cartCallback={ this.cartCallback }
       />
     ));
     this.setState({ renderingCardArray: listArray });
@@ -46,8 +49,17 @@ export default class App extends Component {
     this.setState({ textoDigitado }, this.creatingCard);
   }
 
+  cartCallback(item) {
+    this.setState((prevState) => ({
+      renderingItemCart: [{
+        ...prevState.renderingItemCart,
+        nome: item,
+      }],
+    }));
+  }
+
   render() {
-    const { textoDigitado, categorySelected, renderingCardArray } = this.state;
+    const { textoDigitado, categorySelected, renderingCardArray, renderingItemCart } = this.state;
     return (
       <BrowserRouter>
         <div className="root">
@@ -65,9 +77,10 @@ export default class App extends Component {
               categorySelected={ categorySelected }
               creatingCard={ this.creatingCard }
               renderingCardArray={ renderingCardArray }
+              cartCallback={ this.cartCallback }
             />
           </div>
-          <Cart />
+          <Cart renderingItemCart={ renderingItemCart } />
         </div>
       </BrowserRouter>
     );

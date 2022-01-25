@@ -8,6 +8,7 @@ class Card extends Component {
       titulo,
       foto,
       price,
+      cartCallback,
     } = this.props;
 
     return (
@@ -24,6 +25,12 @@ class Card extends Component {
         <h4>
           {price}
         </h4>
+        <button
+          type="button"
+          onClick={ () => { cartCallback(titulo, price); } }
+        >
+          Adicionar no Carrinho
+        </button>
       </div>
     );
   }
