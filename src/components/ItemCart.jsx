@@ -6,14 +6,17 @@ export default class ItemCart extends Component {
     return (
       <div>
         <ul>
-          {renderingItemCart.map((item) => (
-            <div key={ item[0] } data-testid="product-add-to-cart">
-              <h2 className="" data-testid="shopping-cart-product-name">
-                {item[0]}
-              </h2>
-              <h3>{item[1]}</h3>
-            </div>
-          ))}
+          {
+            Object.keys(renderingItemCart).map((item) => (
+              <div key={ item } data-testid="product-add-to-cart">
+                {/* <h2 className="" data-testid="shopping-cart-product-name">
+                  {item.name}
+                </h2>
+                <h3>{item.price}</h3> */}
+                {item}
+              </div>
+            ))
+          }
         </ul>
       </div>
     );
