@@ -9,7 +9,6 @@ class Content extends Component {
 
   render() {
     const { renderingCardArray } = this.props;
-    console.log(renderingCardArray);
 
     return (
       <div>
