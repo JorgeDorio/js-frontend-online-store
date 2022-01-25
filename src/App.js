@@ -15,11 +15,13 @@ export default class App extends Component {
       textoDigitado: [],
       categorySelected: '',
       renderingCardArray: [],
+      renderingItemCart: {},
     };
 
     this.sidebarCallback = this.sidebarCallback.bind(this);
     this.searchbarCallback = this.searchbarCallback.bind(this);
     this.creatingCard = this.creatingCard.bind(this);
+    this.cartCallback = this.cartCallback.bind(this);
   }
 
   creatingCard = async () => {
@@ -30,9 +32,11 @@ export default class App extends Component {
       <Card
         key={ item.id }
         titulo={ item.title }
+        id={ item.id }
         foto={ item.thumbnail }
         price={ item.price }
         idCategory={ item.category_id }
+        cartCallback={ this.cartCallback }
       />
     ));
     this.setState({ renderingCardArray: listArray });
@@ -46,8 +50,41 @@ export default class App extends Component {
     this.setState({ textoDigitado }, this.creatingCard);
   }
 
+  cartCallback(id, item, price) {
+    // Pega o estado atual
+    const { renderingItemCart } = this.state;
+
+    // Verifica se já existe algum item com o ID do item adicionado, se sim, adiciona uma unidade à quantidade, se não, determina a quantidade como 1.
+    const quant = renderingItemCart[id] === undefined
+      ? 1 : renderingItemCart[id].quantidade + 1;
+
+    // Gera o objeto
+    const cartItem = {
+      name: item,
+      valor: price,
+      quantidade: quant,
+    };
+
+    // Adiciona o objeto ao estado
+    renderingItemCart[id] = cartItem;
+
+    // Atualiza o estado
+    this.setState(renderingItemCart);
+  }
+
+  addQtdy(id) {
+    const { renderingItemCart } = this.state;
+    // renderingItemCart[id].quantidade + 1
+  }
+
   render() {
-    const { textoDigitado, categorySelected, renderingCardArray } = this.state;
+    const {
+      textoDigitado,
+      categorySelected,
+      renderingCardArray,
+      renderingItemCart,
+    } = this.state;
+
     return (
       <BrowserRouter>
         <div className="root">
@@ -67,7 +104,10 @@ export default class App extends Component {
               renderingCardArray={ renderingCardArray }
             />
           </div>
-          <Cart />
+          <Cart
+            renderingItemCart={ renderingItemCart }
+            addQtdy={ this.addQtdy }
+          />
         </div>
       </BrowserRouter>
     );
