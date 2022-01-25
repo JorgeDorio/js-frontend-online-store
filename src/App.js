@@ -72,6 +72,11 @@ export default class App extends Component {
     this.setState(renderingItemCart);
   }
 
+  addQtdy(id) {
+    const { renderingItemCart } = this.state;
+    // renderingItemCart[id].quantidade + 1
+  }
+
   render() {
     const {
       textoDigitado,
@@ -99,7 +104,10 @@ export default class App extends Component {
               renderingCardArray={ renderingCardArray }
             />
           </div>
-          <Cart renderingItemCart={ renderingItemCart } />
+          <Cart
+            renderingItemCart={ renderingItemCart }
+            addQtdy={ this.addQtdy }
+          />
         </div>
       </BrowserRouter>
     );

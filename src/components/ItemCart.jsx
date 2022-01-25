@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class ItemCart extends Component {
   render() {
-    const { renderingItemCart } = this.props;
+    const { renderingItemCart, addQtdy } = this.props;
     console.log(renderingItemCart);
     return (
       <div>
@@ -23,6 +23,7 @@ export default class ItemCart extends Component {
               <h3 data-testid="">
                 {`R$${item[1].valor}`}
               </h3>
+              <button type="button" onClick={ console.log((item.id)) }> + </button>
               <hr />
               <br />
             </div>
