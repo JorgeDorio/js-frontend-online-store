@@ -49,13 +49,22 @@ export default class App extends Component {
     this.setState({ textoDigitado }, this.creatingCard);
   }
 
-  cartCallback(item) {
+  cartCallback(titulo, price, quantity = 1) {
+    const { renderingItemCart } = this.state;
+    if (renderingItemCart.includes(titulo)) {
+      quantity += 1;
+    }
     this.setState((prevState) => ({
-      renderingItemCart: [{
+      renderingItemCart: [
         ...prevState.renderingItemCart,
-        nome: item,
-      }],
+        `${quantity}x ${titulo}, R$${price}`,
+      ],
     }));
+
+    // const { renderingItemCart } = this.state;
+    // renderingItemCart.push(titulo[price]);
+    // this.setState({ renderingItemCart });
+    // console.log(renderingItemCart);
   }
 
   render() {
