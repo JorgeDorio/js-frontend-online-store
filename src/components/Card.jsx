@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Card extends Component {
   render() {
-    const {
-      titulo,
-      foto,
-      price,
-      quantity = 1,
-      cartCallback,
-    } = this.props;
+    const { id, titulo, foto, price, cartCallback } = this.props;
 
     return (
       <div className="cardClass" data-testid="product">
@@ -28,7 +21,8 @@ class Card extends Component {
         </h4>
         <button
           type="button"
-          onClick={ () => { cartCallback(titulo, price, quantity); } }
+          data-testid="product-add-to-cart"
+          onClick={ () => { cartCallback(id, titulo, price); } }
         >
           Adicionar no Carrinho
         </button>
@@ -38,9 +32,11 @@ class Card extends Component {
 }
 
 Card.propTypes = {
+  id: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   foto: PropTypes.string.isRequired,
   titulo: PropTypes.string.isRequired,
+  cartCallback: PropTypes.func.isRequired,
 };
 
 export default Card;

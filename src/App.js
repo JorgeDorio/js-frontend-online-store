@@ -15,7 +15,7 @@ export default class App extends Component {
       textoDigitado: [],
       categorySelected: '',
       renderingCardArray: [],
-      renderingItemCart: [],
+      renderingItemCart: {},
     };
 
     this.sidebarCallback = this.sidebarCallback.bind(this);
@@ -32,6 +32,7 @@ export default class App extends Component {
       <Card
         key={ item.id }
         titulo={ item.title }
+        id={ item.id }
         foto={ item.thumbnail }
         price={ item.price }
         idCategory={ item.category_id }
@@ -49,28 +50,36 @@ export default class App extends Component {
     this.setState({ textoDigitado }, this.creatingCard);
   }
 
-  cartCallback(item, price, quantity) {
+  cartCallback(id, item, price) {
+    // Pega o estado atual
     const { renderingItemCart } = this.state;
 
-    console.log('Dentro do state', renderingItemCart);
+    // Verifica se já existe algum item com o ID do item adicionado, se sim, adiciona uma unidade à quantidade, se não, determina a quantidade como 1.
+    const quant = renderingItemCart[id] === undefined
+      ? 1 : renderingItemCart[id].quantidade + 1;
 
-    // const result = renderingItemCart.filter((eachitem) => (eachitem.includes(item)));
-    // console.log(result);
-    // if () {
-    //   console.log('ja tem um item desse');
-    // }
-    this.setState((prevState) => ({
-      renderingItemCart: [...prevState.renderingItemCart, [item, price, quantity]],
-    }));
+    // Gera o objeto
+    const cartItem = {
+      name: item,
+      valor: price,
+      quantidade: quant,
+    };
 
-    // const { renderingItemCart } = this.state;
-    // renderingItemCart.push(titulo[price]);
-    // this.setState({ renderingItemCart });
-    // console.log(renderingItemCart);
+    // Adiciona o objeto ao estado
+    renderingItemCart[id] = cartItem;
+
+    // Atualiza o estado
+    this.setState(renderingItemCart);
   }
 
   render() {
-    const { textoDigitado, categorySelected, renderingCardArray, renderingItemCart } = this.state;
+    const {
+      textoDigitado,
+      categorySelected,
+      renderingCardArray,
+      renderingItemCart,
+    } = this.state;
+
     return (
       <BrowserRouter>
         <div className="root">
@@ -88,7 +97,6 @@ export default class App extends Component {
               categorySelected={ categorySelected }
               creatingCard={ this.creatingCard }
               renderingCardArray={ renderingCardArray }
-              cartCallback={ this.cartCallback }
             />
           </div>
           <Cart renderingItemCart={ renderingItemCart } />
