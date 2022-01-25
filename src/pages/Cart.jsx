@@ -1,23 +1,15 @@
 import React from 'react';
+import ItemCart from '../components/ItemCart';
 
 class Cart extends React.Component {
   render() {
     const { renderingItemCart } = this.props;
-
     return (
       <div>
         <h1 data-testid="shopping-cart-empty-message" className="">
           Seu carrinho está vazio
         </h1>
-        <ul>
-          {renderingItemCart.map((item) => (
-            <div key={ item } data-testid="product-add-to-cart">
-              <li className="" data-testid="shopping-cart-product-name">
-                {item}
-              </li>
-            </div>
-          ))}
-        </ul>
+        <ItemCart renderingItemCart={ renderingItemCart } />
       </div>
     );
   }

@@ -49,12 +49,9 @@ export default class App extends Component {
     this.setState({ textoDigitado }, this.creatingCard);
   }
 
-  cartCallback(item) {
+  cartCallback(item, price) {
     this.setState((prevState) => ({
-      renderingItemCart: [{
-        ...prevState.renderingItemCart,
-        nome: item,
-      }],
+      renderingItemCart: [...prevState.renderingItemCart, [item, price]],
     }));
   }
 
