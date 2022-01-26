@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class ItemCart extends Component {
   render() {
-    const { renderingItemCart, addQtdy } = this.props;
+    const { renderingItemCart } = this.props;
     console.log(renderingItemCart);
     return (
       <div>

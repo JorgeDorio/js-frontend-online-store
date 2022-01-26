@@ -73,10 +73,10 @@ export default class App extends Component {
     this.setState(renderingItemCart);
   }
 
-  addQtdy(id) {
-    const { renderingItemCart } = this.state;
-    // renderingItemCart[id].quantidade + 1
-  }
+  // addQtdy(id) {
+  //   const { renderingItemCart } = this.state;
+  //   // renderingItemCart[id].quantidade + 1
+  // }
 
   render() {
     const {
@@ -118,7 +118,6 @@ export default class App extends Component {
             </div>
             <Cart
               renderingItemCart={ renderingItemCart }
-              addQtdy={ this.addQtdy }
             />
           </div>
         </Switch>
