@@ -50,7 +50,13 @@ export default class ItemCart extends Component {
 }
 
 ItemCart.propTypes = {
-  renderingItemCart: PropTypes.objectOf({
-    props: PropTypes.object,
-  }).isRequired,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  quantidade: PropTypes.string.isRequired,
+  valor: PropTypes.string.isRequired,
+  handlePlusClick: PropTypes.func.isRequired,
+  handleSubClick: PropTypes.func.isRequired,
+  // renderingItemCart: PropTypes.objectOf({
+  //   props: PropTypes.object,
+  // }).isRequired,
 };

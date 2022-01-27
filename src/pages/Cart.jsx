@@ -30,6 +30,8 @@ class Cart extends React.Component {
 
 // ATENÇAO > O CART TEM QUE EXIBIR UMA NOVA PAGINA. E NAO DO LADO DIREITO.
 Cart.propTypes = {
+  handlePlusClick: PropTypes.func.isRequired,
+  handleSubClick: PropTypes.func.isRequired,
   renderingItemCart: PropTypes.objectOf({
     id: PropTypes.string,
   }).isRequired,
