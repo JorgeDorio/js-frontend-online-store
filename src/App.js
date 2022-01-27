@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Searchbar from './components/Searchbar';
 import Sidebar from './components/Sidebar';
 import Content from './components/Content';
@@ -7,6 +7,7 @@ import Cart from './pages/Cart';
 import Card from './components/Card';
 import { getProductsFromCategoryAndQuery } from './services/api';
 import './App.css';
+import ProductDetails from './pages/ProductDetails';
 
 export default class App extends Component {
   constructor() {
@@ -107,23 +108,45 @@ export default class App extends Component {
       renderingItemCart,
     } = this.state;
 
+    // console.log('dentro do Cart state', this.state.renderingItemCart);
+
     return (
       <BrowserRouter>
-        <div className="root">
-          <Sidebar
-            sidebarCallback={ this.sidebarCallback }
-            creatingCard={ this.creatingCard }
+        {console.log('renderingCardArray', renderingCardArray)}
+        <Switch>
+          <Route
+            exact
+            path="/productDetails/:id"
+            // component={ ProductDetails }
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                valueArray={ { renderingCardArray } }
+                putItemInCart={ this.cartCallback }
+                // valueArray={ () => [renderingCardArray] }
+              />) }
           />
-          <div className="searchNContent">
-            <Searchbar
-              searchbarCallback={ this.searchbarCallback }
+          {/* <Card />
+          </Route> */}
+          <div className="root">
+            <Sidebar
+              sidebarCallback={ this.sidebarCallback }
               creatingCard={ this.creatingCard }
             />
-            <Content
-              textoDigitado={ textoDigitado }
-              categorySelected={ categorySelected }
-              creatingCard={ this.creatingCard }
-              renderingCardArray={ renderingCardArray }
+            <div className="searchNContent">
+              <Searchbar
+                searchbarCallback={ this.searchbarCallback }
+                creatingCard={ this.creatingCard }
+              />
+              <Content
+                textoDigitado={ textoDigitado }
+                categorySelected={ categorySelected }
+                creatingCard={ this.creatingCard }
+                renderingCardArray={ renderingCardArray }
+              />
+            </div>
+            <Cart
+              renderingItemCart={ renderingItemCart }
             />
           </div>
           <Cart
@@ -132,6 +155,7 @@ export default class App extends Component {
             handleSubClick={ this.handleSubClick }
           />
         </div>
+        </Switch>
       </BrowserRouter>
     );
   }
