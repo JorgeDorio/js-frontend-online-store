@@ -154,7 +154,6 @@ export default class App extends Component {
             handlePlusClick={ this.handlePlusClick }
             handleSubClick={ this.handleSubClick }
           />
-        </div>
         </Switch>
       </BrowserRouter>
     );
