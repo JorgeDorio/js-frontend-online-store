@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+// import ProductDetails from '../pages/ProductDetails';
 
 class Card extends Component {
   render() {
@@ -11,20 +12,22 @@ class Card extends Component {
     // test.replaceAll(' ', '_');
 
     return (
-      <Link to={ `/productDetails/:${titulo}` } data-testid="product-detail-link">
+      <div>
         <div className="cardClass" data-testid="product">
-          <h3>
-            {titulo}
-          </h3>
-          <img
-            src={ foto }
-            alt="Alternative"
-            data-testid=""
-            width="150px"
-          />
-          <h4>
-            {price}
-          </h4>
+          <Link to={ `/productDetails/:${titulo}` } data-testid="product-detail-link">
+            <h3>
+              {titulo}
+            </h3>
+            <img
+              src={ foto }
+              alt="Alternative"
+              data-testid=""
+              width="150px"
+            />
+            <h4>
+              {price}
+            </h4>
+          </Link>
           <button
             type="button"
             data-testid="product-add-to-cart"
@@ -33,7 +36,7 @@ class Card extends Component {
             Adicionar no Carrinho
           </button>
         </div>
-      </Link>
+      </div>
     );
   }
 }

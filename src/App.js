@@ -86,16 +86,23 @@ export default class App extends Component {
       renderingItemCart,
     } = this.state;
 
-    // console.log('dentro do state', this.state.renderingItemCart);
+    console.log('dentro do Cart state', this.state.renderingItemCart);
 
     return (
       <BrowserRouter>
+        {console.log('renderingCardArray', renderingCardArray)}
         <Switch>
           <Route
             exact
             path="/productDetails/:id"
             // component={ ProductDetails }
-            render={ (props) => <ProductDetails { ...props } /> }
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                valueArray={ { renderingCardArray } }
+                putItemInCart={ this.cartCallback }
+                // valueArray={ () => [renderingCardArray] }
+              />) }
           />
           {/* <Card />
           </Route> */}
