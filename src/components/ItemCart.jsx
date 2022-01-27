@@ -2,65 +2,47 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class ItemCart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      renderingItemCart: props.renderingItemCart,
-    };
-    // this.addNewItem = this.addNewItem.bind(this);
-  }
-
-  // componentDidUpdate() {
-  // const { renderingItemCart } = this.state;
-  // console.log(renderingItemCart);
-  // this.addNewItem(renderingItemCart);
-  // renderingItemCart.map((item) => (
-  //   this.addNewItem(item)
-  // ));
-  // }
-
-  // addNewItem = (item) => {
-  //   // para acrescentarmos ou removermos algo de uma propriedade
-  //   // do state, precisamos passar uma callback para o setState
-  //   this.setState((prevState) => {
-  //     return {
-  //       renderingItemCart: [...prevState.renderingItemCart, item],
-  //     };
-  //   });
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     name: props.name,
+  //     quantidade: props.quantidade,
+  //     valor: props.valor,
+  //     // renderingItemCart: props.renderingItemCart,
+  //   };
+  // // this.addNewItem = this.addNewItem.bind(this);
   // }
 
   render() {
-    const { renderingItemCart } = this.state;
-    const { name, quantidade, valor } = this.state;
+    const { id, name, quantidade, valor, handlePlusClick, handleSubClick } = this.props;
     return (
       <div>
         <ul>
-
-          {Object.entries(renderingItemCart).map((item) => (
-            <div key={ item }>
-              <h3>{`${item[1].quantidade}x:`}</h3>
-              <h3>{`${item[1].name}.`}</h3>
-              <h3>{`R$${item[1].valor}`}</h3>
+          <div key={ id }>
+            <div data-testid="shopping-cart-product-quantity">
+              <h3>{quantidade}</h3>
             </div>
-
-          ))}
-
-          {/* {Object.entries(renderingItemCart).map((item) => (
-            <div key={ item }>
-              <h3 data-testid="shopping-cart-product-quantity">
-                {`${item[1].quantidade}x:`}
-              </h3>
-              <h3 data-testid="shopping-cart-product-name">
-                {`${item[1].name}.`}
-              </h3>
-              <h3 data-testid="">
-                {`R$${item[1].valor}`}
-              </h3>
-              {/* <button type="button" onClick={ () => { console.log(item[1].quantidade); } }> + </button>
-              <hr />
-              <br />
+            <h3 data-testid="shopping-cart-product-name">{`${name}.`}</h3>
+            <h3>{`R$${valor}`}</h3>
+            {/* preciso de uma func embaixo para onclick */}
+            <div data-testid="product-increase-quantity">
+              <button
+                type="button"
+                onClick={ () => { handlePlusClick(id); } }
+              >
+                (+)
+              </button>
             </div>
-          ))} */}
+            <div data-testid="product-decrease-quantity">
+              <button
+                type="button"
+                onClick={ () => { handleSubClick(id); } }
+              >
+                (-)
+              </button>
+            </div>
+            <hr />
+          </div>
         </ul>
       </div>
     );

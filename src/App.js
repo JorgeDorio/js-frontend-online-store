@@ -42,6 +42,32 @@ export default class App extends Component {
     this.setState({ renderingCardArray: listArray });
   }
 
+  handlePlusClick = (id) => {
+    this.setState((prevState) => ({
+      renderingItemCart: {
+        [id]: {
+          quantidade: prevState.renderingItemCart[id].quantidade + 1,
+          name: prevState.renderingItemCart[id].name,
+          id,
+          valor: prevState.renderingItemCart[id].valor,
+        },
+      },
+    }));
+  }
+
+  handleSubClick = (id) => {
+    this.setState((prevState) => ({
+      renderingItemCart: {
+        [id]: {
+          quantidade: prevState.renderingItemCart[id].quantidade - 1,
+          name: prevState.renderingItemCart[id].name,
+          id,
+          valor: prevState.renderingItemCart[id].valor,
+        },
+      },
+    }));
+  }
+
   sidebarCallback(categorySelected) {
     this.setState({ categorySelected }, this.creatingCard);
   }
@@ -60,6 +86,7 @@ export default class App extends Component {
 
     // Gera o objeto
     const cartItem = {
+      id,
       name: item,
       valor: price,
       quantidade: quant,
@@ -99,7 +126,11 @@ export default class App extends Component {
               renderingCardArray={ renderingCardArray }
             />
           </div>
-          <Cart renderingItemCart={ renderingItemCart } />
+          <Cart
+            renderingItemCart={ renderingItemCart }
+            handlePlusClick={ this.handlePlusClick }
+            handleSubClick={ this.handleSubClick }
+          />
         </div>
       </BrowserRouter>
     );
