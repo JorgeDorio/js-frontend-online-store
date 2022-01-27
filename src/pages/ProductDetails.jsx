@@ -32,11 +32,14 @@ export default class ProductDetails extends Component {
     // console.log('valueArray', valueArray);
     // compareElementsArray
     return (
-      <div>
+      <div data-testid="product-detail-add-to-cart">
         Product Details
-        <h3 data-testid="product-detail-name">{id}</h3>
+        <div data-testid="shopping-cart-product-name">
+          <h3 data-testid="product-detail-name">{id}</h3>
+        </div>
+        <div data-testid="shopping-cart-product-quantity">1</div>
         <button
-          data-testid="product-detail-add-to-cart"
+          data-testid="shopping-cart-button"
           type="button"
           onClick={ this.compareElementsArray }
         >

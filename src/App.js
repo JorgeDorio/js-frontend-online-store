@@ -86,7 +86,7 @@ export default class App extends Component {
       renderingItemCart,
     } = this.state;
 
-    console.log('dentro do Cart state', this.state.renderingItemCart);
+    // console.log('dentro do Cart state', this.state.renderingItemCart);
 
     return (
       <BrowserRouter>
