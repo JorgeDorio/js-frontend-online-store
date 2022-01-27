@@ -9,7 +9,7 @@ class Cart extends React.Component {
     return (
       <div>
         <h1 data-testid="shopping-cart-empty-message" className="">
-          Seu carrinho:
+          Seu carrinho está vazio
         </h1>
         {Object.entries(renderingItemCart).map((item) => (
           // <h4>{item[1].name}</h4>
