@@ -6,15 +6,8 @@ class Searchbar extends Component {
   constructor() {
     super();
     this.state = {
-      // textoDigitado: '',
     };
   }
-
-  // handleChange = (event) => {
-  //   const { value } = event.target;
-  //   this.setState({ textoDigitado: value });
-  //   // this.props.searchbarCallback(value);
-  // };
 
   searchQuery = async () => {
     const { searchbarCallback } = this.props;
@@ -33,7 +26,6 @@ class Searchbar extends Component {
             <input
               type="text"
               id="search"
-              // onChange={ this.handleChange }
               value={ textoDigitado }
               data-testid="query-input"
               className="searchbar"

@@ -23,6 +23,8 @@ export default class App extends Component {
     this.searchbarCallback = this.searchbarCallback.bind(this);
     this.creatingCard = this.creatingCard.bind(this);
     this.cartCallback = this.cartCallback.bind(this);
+    this.handlePlusClick = this.handlePlusClick.bind(this);
+    this.handleSubClick = this.handleSubClick.bind(this);
   }
 
   creatingCard = async () => {
@@ -43,30 +45,36 @@ export default class App extends Component {
     this.setState({ renderingCardArray: listArray });
   }
 
+  // handlePlusClick = (id) => {
+  //   this.setState((prevState) => ({
+  //     renderingItemCart: {
+  //       [id]: {
+  //         quantidade: prevState.renderingItemCart[id].quantidade + 1,
+  //         name: prevState.renderingItemCart[id].name,
+  //         id,
+  //         valor: prevState.renderingItemCart[id].valor,
+  //       },
+  //     },
+  //   }));
+  // }
+
   handlePlusClick = (id) => {
-    this.setState((prevState) => ({
-      renderingItemCart: {
-        [id]: {
-          quantidade: prevState.renderingItemCart[id].quantidade + 1,
-          name: prevState.renderingItemCart[id].name,
-          id,
-          valor: prevState.renderingItemCart[id].valor,
-        },
-      },
-    }));
+    const { renderingItemCart } = this.state;
+
+    const quant = renderingItemCart[id].quantidade + 1;
+
+    renderingItemCart[id].quantidade = quant;
+
+    this.setState(renderingItemCart);
   }
 
   handleSubClick = (id) => {
-    this.setState((prevState) => ({
-      renderingItemCart: {
-        [id]: {
-          quantidade: prevState.renderingItemCart[id].quantidade - 1,
-          name: prevState.renderingItemCart[id].name,
-          id,
-          valor: prevState.renderingItemCart[id].valor,
-        },
-      },
-    }));
+    const { renderingItemCart } = this.state;
+
+    const quant = renderingItemCart[id].quantidade - 1;
+    renderingItemCart[id].quantidade = quant;
+
+    this.setState(renderingItemCart);
   }
 
   sidebarCallback(categorySelected) {
@@ -108,26 +116,19 @@ export default class App extends Component {
       renderingItemCart,
     } = this.state;
 
-    // console.log('dentro do Cart state', this.state.renderingItemCart);
-
     return (
       <BrowserRouter>
-        {console.log('renderingCardArray', renderingCardArray)}
         <Switch>
           <Route
             exact
             path="/productDetails/:id"
-            // component={ ProductDetails }
             render={ (props) => (
               <ProductDetails
                 { ...props }
                 valueArray={ { renderingCardArray } }
                 putItemInCart={ this.cartCallback }
-                // valueArray={ () => [renderingCardArray] }
               />) }
           />
-          {/* <Card />
-          </Route> */}
           <div className="root">
             <Sidebar
               sidebarCallback={ this.sidebarCallback }
@@ -147,13 +148,11 @@ export default class App extends Component {
             </div>
             <Cart
               renderingItemCart={ renderingItemCart }
+              handlePlusClick={ this.handlePlusClick }
+              handleSubClick={ this.handleSubClick }
             />
           </div>
-          <Cart
-            renderingItemCart={ renderingItemCart }
-            handlePlusClick={ this.handlePlusClick }
-            handleSubClick={ this.handleSubClick }
-          />
+
         </Switch>
       </BrowserRouter>
     );
